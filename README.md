@@ -3,7 +3,7 @@
 # 🌳 Tree Species Identification Project
 
 <div align="center">
-  <img src="Face recognition thumbnail" height="1200",width="632" alt="Face"/>
+  <img src="sample tree.jpg" height="2048",width="1365" alt="Tree"/>
   <br/>
  
 </div>
