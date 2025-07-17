@@ -2,6 +2,12 @@
 
 # 🌳 Tree Species Identification Project
 
+<div align="center">
+  <img src="Face recognition thumbnail" height="1200",width="632" alt="Face"/>
+  <br/>
+ 
+</div>
+
 ## 🔍 Project Overview
 The Tree Species Identification Project aims to leverage modern **AI and machine learning techniques** to automate the classification of tree species based on leaf images. Traditionally, tree identification required expert botanical knowledge, but this project uses a **deep learning-based approach** to make the process faster, more accurate, and scalable.
 
