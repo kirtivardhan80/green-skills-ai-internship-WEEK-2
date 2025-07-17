@@ -1,0 +1,1 @@
+# green-skills-ai-internship-WEEK-1
