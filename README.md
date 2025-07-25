@@ -3,9 +3,8 @@
 # 🌳 Tree Species Identification Project
 
 <div align="center">
-  <img src="sample tree.jpg" height="2048",width="1365" alt="Tree"/>
+  <img src="sample tree.jpg" height="2048" width="1365" alt="Tree"/>
   <br/>
- 
 </div>
 
 ## 🔍 Project Overview
@@ -40,6 +39,26 @@ The Tree Species Identification Project aims to leverage modern **AI and machine
 - Plotted a **bar chart of class distribution** to assess balance among categories.
 - Verified that the dataset is properly structured and ready for model training.
 
+### 3. Data Preprocessing
+- Identified and safely removed **corrupted images** using PIL.
+- Handled `.git` system directory issues and ensured only image files were processed.
+- (Optional) Verified that no duplicate or overly small/large images affected training.
+
+### 4. Model Building and Training
+- Used **MobileNetV2** with transfer learning for efficient training.
+- Trained a custom classifier on top of the frozen base model.
+- Achieved **~70% validation accuracy** after 25 epochs.
+
+### 5. Fine-Tuning
+- Unfroze top layers of MobileNetV2.
+- Recompiled the model with a lower learning rate.
+- Fine-tuned the model to improve accuracy and adaptability.
+
 ---
 
-> 🔧 Next steps: Model building, training, evaluation, and deployment.
+### 💡 Improvisations Done By Me
+I implemented a full preprocessing pipeline including detection and removal of corrupted images, ensured system files like `.git` were excluded, and added data augmentation for better generalization. I applied **transfer learning** with MobileNetV2 and fine-tuned the model to significantly improve validation accuracy, making the model more robust to real-world data.
+
+---
+
+> 🚀 Next steps: Test on new images, evaluate with confusion matrix, and deploy the model using Streamlit or Flask.
