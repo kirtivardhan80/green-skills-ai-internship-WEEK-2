@@ -1,4 +1,4 @@
-# green-skills-ai-internship-WEEK-1
+# green-skills-ai-internship-AICTE
 
 # 🌳 Tree Species Identification Project
 
