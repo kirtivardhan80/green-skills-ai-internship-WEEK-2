@@ -11,7 +11,7 @@
 
 ## 🔍 Project Overview
 
-The **Tree Species Identification Project** aims to leverage modern **AI and machine learning techniques** to automate the classification of tree species based on leaf images. Traditionally, this required expert botanical knowledge — this deep learning-based solution makes the process faster, scalable, and more accessible for ecological monitoring and smart agriculture.
+The **Tree Species Identification Project** leverages modern **AI and machine learning techniques** to automate the classification of tree species based on leaf images. Traditionally, this required expert botanical knowledge — this deep learning-based solution makes the process faster, scalable, and more accessible for ecological monitoring and smart agriculture.
 
 ---
 
@@ -34,71 +34,37 @@ The **Tree Species Identification Project** aims to leverage modern **AI and mac
 ## ✅ Work Completed
 
 ### 1️⃣ Dataset Loading
-- Downloaded and extracted locally.
-- Loaded using Keras `ImageDataGenerator` with an **80-20 train-validation split**.
-- All images resized to **224×224** for model compatibility.
+- Dataset was downloaded and loaded using Keras `ImageDataGenerator` with 80-20 split.
 
 ### 2️⃣ Data Visualization
-- Displayed random image samples with their class labels.
-- Plotted class distribution using `matplotlib`.
-- Verified proper structure and labeling of dataset.
+- Sample images and class distribution were visualized using matplotlib.
 
 ### 3️⃣ Data Preprocessing
-- Detected and removed **corrupted images** using PIL.
-- Excluded system folders like `.git`.
-- Ensured only valid image files were processed.
+- Corrupted images were detected and removed using PIL.
+- System folders like `.git` were safely skipped.
 
-### 4️⃣ Model Building, Training 
-- Used **MobileNetV2** as base model with transfer learning.
-- Built custom top layers (GlobalAveragePooling, Dense, Dropout).
-- Trained with base model frozen for 25 epochs (achieved ~70% validation accuracy).
-- Fine-tuned top layers with a lower learning rate for better generalization.
+### 4️⃣ Model Building & Training
+- MobileNetV2 was used as the base model with transfer learning.
+- Model was trained for 25 epochs and validated successfully.
 
----
-
-### 5️⃣ Fine-Tuning & Saving
-- Unfroze upper layers of the MobileNetV2 base.
-- Recompiled with a smaller learning rate (`1e-5`).
-- Trained for 10 additional epochs.
-- Improved performance and adaptability to dataset.
-- ✅ **Saved final model** using:
-
-```python
-model.save("tree_species_model_final.h5")
-```
+### 5️⃣ Fine-Tuning
+- Upper layers of the base model were unfrozen and fine-tuned for additional performance.
+- ✅ Final model was saved after fine-tuning for deployment.
 
 ### 6️⃣ Testing on Custom Images
-- Allowed users to upload new leaf images for prediction.
-- Resized, normalized, and preprocessed images (shape: 224×224×3).
-- Mapped predictions to correct class labels.
-- ✅ Displayed prediction with **confidence score**:
+- The model was tested on new user-uploaded images to validate real-world performance.
 
-```python
-pred = model.predict(img_array)
-predicted_class = np.argmax(pred[0])
-confidence = float(np.max(pred[0])) * 100
-```
-
----
-
-### 7️⃣ Streamlit Web App Deployment
-- Built a Streamlit app (`app.py`) to serve predictions through a web UI.
-- Users can upload any JPG/PNG leaf image and get instant classification.
-- The model is loaded in `.h5` format and predictions are made on-the-fly.
-- Displays both species and model confidence percentage.
-
-```bash
-streamlit run app.py
-```
+### 7️⃣ Streamlit Web App
+- A simple and interactive web interface was created using Streamlit to upload and predict leaf species.
 
 ---
 
 ## 💡 Improvisations Done By Me
 
-- Implemented a full **image preprocessing pipeline** to detect/remove corrupted files.
-- Used `os` and `PIL` to skip non-image folders (like `.git`) and invalid files.
-- Applied **transfer learning + fine-tuning** on MobileNetV2 for robust training.
-- Built and deployed a **Streamlit web app** with confidence-based prediction output.
+- Built a complete preprocessing pipeline to clean the dataset.
+- Used transfer learning and fine-tuning on MobileNetV2 for optimized training.
+- Designed and implemented a working Streamlit app for predictions.
+- Ensured the model was saved after final training for deployment.
 
 ---
 
@@ -109,17 +75,36 @@ streamlit run app.py
 | `tree_species_model_final.h5` | Final trained model (MobileNetV2) |
 | `app.py`                      | Streamlit web app to predict species |
 | `requirements.txt`            | Python packages needed to run app |
-| `tree_dataset/`               | Local dataset with 31 species (not included in repo) |
+| `tree_dataset/`               | Local dataset (not uploaded on GitHub) |
 | `sample tree.jpg`             | Sample image used in README banner |
 
 ---
 
-## 📥 Installation & Setup
+## 📥 Installation
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/yourusername/tree-species-identification.git
 cd tree-species-identification
+```
+
+### 2. Create a virtual environment (recommended)
+
+```bash
+conda create -n treespecies python=3.9
+conda activate treespecies
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
+
+### 4. Run the Streamlit app
+
+```bash
 streamlit run app.py
 ```
 
@@ -127,28 +112,28 @@ streamlit run app.py
 
 ## 🧠 Model Details
 
-- Architecture: **MobileNetV2** (pretrained on ImageNet)
-- Loss Function: `categorical_crossentropy`
-- Optimizer: `Adam`
+- Base Model: **MobileNetV2** (ImageNet pretrained)
+- Classifier: Custom top layers (Dense + Dropout)
+- Loss: Categorical Crossentropy
+- Optimizer: Adam
 - Accuracy Achieved: ~70% (validation)
-- Confidence scores provided in prediction results
 
 ---
 
 ## 🔮 Future Work
 
-- 🎯 Deploy to [Streamlit Cloud](https://share.streamlit.io/)
-- 📱 Build a mobile-compatible UI
-- 📊 Add model explainability (Grad-CAM, LIME)
-- 🧪 Evaluate on a real-world image dataset (not just Kaggle)
+- Add confidence score display for predictions.
+- Deploy the Streamlit app on [Streamlit Cloud](https://share.streamlit.io/)
+- Explore Grad-CAM or LIME for explainability.
+- Expand dataset with real-world images for testing.
 
 ---
 
 ## 🙌 Acknowledgements
 
 - Dataset by [Vidit Gandhi on Kaggle](https://www.kaggle.com/datasets/viditgandhi/tree-species-identification-dataset)
-- Internship and guidance by **Edunet Foundation**, **AICTE**, and **Shell India**
+- Internship organized by **Edunet Foundation**, supported by **AICTE** and **Shell India**
 
 ---
 
-> Made with 🌿 by Kirti Vardhan Singh during the Green Skills AI Internship (AICTE–Shell)
+> Made with ❤️ by Kirti Vardhan Singh during the Green Skills AI Internship (AICTE–Shell)
