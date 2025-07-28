@@ -48,24 +48,24 @@ The **Tree Species Identification Project** aims to leverage modern **AI and mac
 - Excluded system folders like `.git`.
 - Ensured only valid image files were processed.
 
-### 4️⃣ Model Building, Training & Saving
+### 4️⃣ Model Building, Training 
 - Used **MobileNetV2** as base model with transfer learning.
 - Built custom top layers (GlobalAveragePooling, Dense, Dropout).
 - Trained with base model frozen for 25 epochs (achieved ~70% validation accuracy).
 - Fine-tuned top layers with a lower learning rate for better generalization.
+
+---
+
+### 5️⃣ Fine-Tuning & Saving
+- Unfroze upper layers of the MobileNetV2 base.
+- Recompiled with a smaller learning rate (`1e-5`).
+- Trained for 10 additional epochs.
+- Improved performance and adaptability to dataset.
 - ✅ **Saved final model** using:
 
 ```python
 model.save("tree_species_model_final.h5")
 ```
-
----
-
-### 5️⃣ Fine-Tuning
-- Unfroze upper layers of the MobileNetV2 base.
-- Recompiled with a smaller learning rate (`1e-5`).
-- Trained for 10 additional epochs.
-- Improved performance and adaptability to dataset.
 
 ### 6️⃣ Testing on Custom Images
 - Allowed users to upload new leaf images for prediction.
