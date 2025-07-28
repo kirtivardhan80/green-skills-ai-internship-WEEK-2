@@ -131,7 +131,7 @@ streamlit run app.py
 
 ## 🙌 Acknowledgements
 
-- Dataset by [Vidit Gandhi on Kaggle]([https://www.kaggle.com/datasets/viditgandhi/tree-species-identification-dataset](https://www.kaggle.com/datasets/viditgandhi/tree-species-identification-dataset))
+- Dataset by [Vidit Gandhi on Kaggle](https://www.kaggle.com/datasets/viditgandhi/tree-species-identification-dataset)
 - Internship organized by **Edunet Foundation**, supported by **AICTE** and **Shell India**
 
 ---
