@@ -7,58 +7,148 @@
   <br/>
 </div>
 
+---
+
 ## 🔍 Project Overview
-The Tree Species Identification Project aims to leverage modern **AI and machine learning techniques** to automate the classification of tree species based on leaf images. Traditionally, tree identification required expert botanical knowledge, but this project uses a **deep learning-based approach** to make the process faster, more accurate, and scalable.
+
+The **Tree Species Identification Project** aims to leverage modern **AI and machine learning techniques** to automate the classification of tree species based on leaf images. Traditionally, this required expert botanical knowledge — this deep learning-based solution makes the process faster, scalable, and more accessible for ecological monitoring and smart agriculture.
 
 ---
 
 ## 🎯 Objectives
-- Develop a system to classify tree species using leaf images.
-- Automate the process using computer vision and deep learning.
-- Provide a foundation for ecological monitoring and smart agriculture applications.
+
+- 📸 Classify tree species using leaf images.
+- ⚙️ Automate identification using computer vision and deep learning.
+- 🌾 Support ecological research and smart farming initiatives.
 
 ---
 
 ## 🗂️ Dataset
+
 - **Source**: [Kaggle – Tree Species Identification Dataset](https://www.kaggle.com/datasets/viditgandhi/tree-species-identification-dataset)
-- The dataset contains thousands of images of tree leaves, organized in subfolders by species.
-- Each folder represents a different species or disease class.
+- Thousands of leaf images categorized into 31 species-specific folders.
+- Each folder represents a different tree species.
 
 ---
 
 ## ✅ Work Completed
 
-### 1. Dataset Loading
-- The dataset was downloaded locally and extracted.
-- Images were loaded using Keras’s `ImageDataGenerator`.
-- An **80-20 split** was created for training and validation using the `validation_split` parameter.
-- All images were resized to **224×224** for model compatibility.
+### 1️⃣ Dataset Loading
+- Downloaded and extracted locally.
+- Loaded using Keras `ImageDataGenerator` with an **80-20 train-validation split**.
+- All images resized to **224×224** for model compatibility.
 
-### 2. Data Visualization
-- Displayed **random image samples** with class labels to verify dataset quality.
-- Plotted a **bar chart of class distribution** to assess balance among categories.
-- Verified that the dataset is properly structured and ready for model training.
+### 2️⃣ Data Visualization
+- Displayed random image samples with their class labels.
+- Plotted class distribution using `matplotlib`.
+- Verified proper structure and labeling of dataset.
 
-### 3. Data Preprocessing
-- Identified and safely removed **corrupted images** using PIL.
-- Handled `.git` system directory issues and ensured only image files were processed.
-- (Optional) Verified that no duplicate or overly small/large images affected training.
+### 3️⃣ Data Preprocessing
+- Detected and removed **corrupted images** using PIL.
+- Excluded system folders like `.git`.
+- Ensured only valid image files were processed.
 
-### 4. Model Building and Training
-- Used **MobileNetV2** with transfer learning for efficient training.
-- Trained a custom classifier on top of the frozen base model.
-- Achieved **~70% validation accuracy** after 25 epochs.
+### 4️⃣ Model Building, Training & Saving
+- Used **MobileNetV2** as base model with transfer learning.
+- Built custom top layers (GlobalAveragePooling, Dense, Dropout).
+- Trained with base model frozen for 25 epochs (achieved ~70% validation accuracy).
+- Fine-tuned top layers with a lower learning rate for better generalization.
+- ✅ **Saved final model** using:
 
-### 5. Fine-Tuning
-- Unfroze top layers of MobileNetV2.
-- Recompiled the model with a lower learning rate.
-- Fine-tuned the model to improve accuracy and adaptability.
-
----
-
-### 💡 Improvisations Done By Me
-I implemented a full preprocessing pipeline including detection and removal of corrupted images, ensured system files like `.git` were excluded, and added data augmentation for better generalization. I applied **transfer learning** with MobileNetV2 and fine-tuned the model to significantly improve validation accuracy, making the model more robust to real-world data.
+```python
+model.save("tree_species_model_final.h5")
+```
 
 ---
 
-> 🚀 Next steps: Test on new images, evaluate with confusion matrix, and deploy the model using Streamlit or Flask.
+### 5️⃣ Fine-Tuning
+- Unfroze upper layers of the MobileNetV2 base.
+- Recompiled with a smaller learning rate (`1e-5`).
+- Trained for 10 additional epochs.
+- Improved performance and adaptability to dataset.
+
+### 6️⃣ Testing on Custom Images
+- Allowed users to upload new leaf images for prediction.
+- Resized, normalized, and preprocessed images (shape: 224×224×3).
+- Mapped predictions to correct class labels.
+- ✅ Displayed prediction with **confidence score**:
+
+```python
+pred = model.predict(img_array)
+predicted_class = np.argmax(pred[0])
+confidence = float(np.max(pred[0])) * 100
+```
+
+---
+
+### 7️⃣ Streamlit Web App Deployment
+- Built a Streamlit app (`app.py`) to serve predictions through a web UI.
+- Users can upload any JPG/PNG leaf image and get instant classification.
+- The model is loaded in `.h5` format and predictions are made on-the-fly.
+- Displays both species and model confidence percentage.
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## 💡 Improvisations Done By Me
+
+- Implemented a full **image preprocessing pipeline** to detect/remove corrupted files.
+- Used `os` and `PIL` to skip non-image folders (like `.git`) and invalid files.
+- Applied **transfer learning + fine-tuning** on MobileNetV2 for robust training.
+- Built and deployed a **Streamlit web app** with confidence-based prediction output.
+
+---
+
+## 📦 Files Included
+
+| File/Folder                    | Description |
+|-------------------------------|-------------|
+| `tree_species_model_final.h5` | Final trained model (MobileNetV2) |
+| `app.py`                      | Streamlit web app to predict species |
+| `requirements.txt`            | Python packages needed to run app |
+| `tree_dataset/`               | Local dataset with 31 species (not included in repo) |
+| `sample tree.jpg`             | Sample image used in README banner |
+
+---
+
+## 📥 Installation & Setup
+
+```bash
+git clone https://github.com/yourusername/tree-species-identification.git
+cd tree-species-identification
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+---
+
+## 🧠 Model Details
+
+- Architecture: **MobileNetV2** (pretrained on ImageNet)
+- Loss Function: `categorical_crossentropy`
+- Optimizer: `Adam`
+- Accuracy Achieved: ~70% (validation)
+- Confidence scores provided in prediction results
+
+---
+
+## 🔮 Future Work
+
+- 🎯 Deploy to [Streamlit Cloud](https://share.streamlit.io/)
+- 📱 Build a mobile-compatible UI
+- 📊 Add model explainability (Grad-CAM, LIME)
+- 🧪 Evaluate on a real-world image dataset (not just Kaggle)
+
+---
+
+## 🙌 Acknowledgements
+
+- Dataset by [Vidit Gandhi on Kaggle](https://www.kaggle.com/datasets/viditgandhi/tree-species-identification-dataset)
+- Internship and guidance by **Edunet Foundation**, **AICTE**, and **Shell India**
+
+---
+
+> Made with 🌿 by Kirti Vardhan Singh during the Green Skills AI Internship (AICTE–Shell)
